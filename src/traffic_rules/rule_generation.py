@@ -45,8 +45,9 @@ def make_SafeDistanceLabelFunction(params):
     max_agents_for_crossing = params["max_agents_for_crossing"]
     use_frac_param_from_world = params["use_frac_param_from_world"]
     lateral_difference_threshold = params["lateral_difference_threshold"]
+    angle_difference_threshold = params["angle_difference_threshold"]
     check_lateral_dist = params["check_lateral_dist"]
-    return SafeDistanceLabelFunction(label_str, to_rear, delta_ego, delta_others, a_e, a_o, consider_crossing_corridors, max_agents_for_crossing, use_frac_param_from_world, lateral_difference_threshold, check_lateral_dist)
+    return SafeDistanceLabelFunction(label_str, to_rear, delta_ego, delta_others, a_e, a_o, consider_crossing_corridors, max_agents_for_crossing, use_frac_param_from_world, lateral_difference_threshold, angle_difference_threshold, check_lateral_dist)
 
 def make_CollisionEgoLabelFunction(params):
     label_str = params["label_str"]

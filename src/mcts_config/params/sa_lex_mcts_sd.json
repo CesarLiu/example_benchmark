@@ -51,6 +51,7 @@
           "max_agents_for_crossing": 4,
           "use_frac_param_from_world": false,
           "lateral_difference_threshold": 2.0,
+          "angle_difference_threshold": 1.57,
           "check_lateral_dist": false
         }
       ],

@@ -17,7 +17,7 @@ def get_traffic_rule_evaluator_params(rule_name):
     if rule_name == "safe_distance":
         rule = {"type": "EvaluatorLTL",
                 "params": {"ltl_formula": "G sd_front",
-                           "label_functions": [SafeDistanceLabelFunction("sd_front", False, 1.0, 1.0, -7.84, -7.84, True, 4, False, 2.0, False)]}}
+                           "label_functions": [SafeDistanceLabelFunction("sd_front", False, 1.0, 1.0, -7.84, -7.84, True, 4, False, 2.0, 1.57, False)]}}
 
     elif rule_name == "zip_merge":
         logging.raiseExceptions(NOT_AVAILABLE)
