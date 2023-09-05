@@ -33,7 +33,7 @@
           },
           {
             "formula": "G sd_front",
-            "weight": -1.0,
+            "weight": 1.0,
             "priority": 1
           }
         ]

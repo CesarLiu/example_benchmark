@@ -6,9 +6,14 @@
 # This work is licensed under the terms of the MIT license.
 # For a copy, see <https://opensource.org/licenses/MIT>.
 
+try:
+    import debug_settings
+except:
+    pass
+
+
 import time
 import logging
-
 from bark.runtime.commons.parameters import ParameterServer
 from bark.runtime.viewer.matplotlib_viewer import MPViewer
 from bark.runtime.viewer.video_renderer import VideoRenderer
@@ -30,7 +35,7 @@ params_mobil = ParameterServer(
     filename="src/mcts_config/params/mobil.json", log_if_default=True)
 
 behaviors_tested, params_dict = create_mcts_configurations(
-    "src/mcts_config/params/", [50], ['sa_mcts'])
+    "src/mcts_config/params/", [50], ['sa_lex_mcts_sd'])
 
 # configure both lanes of the highway. the right lane has one controlled agent
 left_lane = DeterministicLaneCorridorConfig(params=params,
@@ -38,15 +43,15 @@ left_lane = DeterministicLaneCorridorConfig(params=params,
                                             road_ids=[0, 1],
                                             behavior_model=BehaviorMobilRuleBased(
                                                 params_mobil),
-                                            s_start=[15, 35],
-                                            vel_start=10)
+                                            s_start=[4, 28],
+                                            vel_start=9)
 right_lane = DeterministicLaneCorridorConfig(params=params,
                                              lane_corridor_id=1,
                                              road_ids=[0, 1],
                                              controlled_ids=True,
-                                             behavior_model=behaviors_tested["sa_mcts_50"],
-                                             s_start=[15],
-                                             vel_start=12)
+                                             behavior_model=behaviors_tested["sa_lex_mcts_sd_50"],
+                                             s_start=[8],
+                                             vel_start=5)
 
 map_path = "src/database/maps/merging_long_v01.xodr"
 
@@ -78,11 +83,11 @@ env = Runtime(step_time=sim_step_time,
                     scenario_generator=scenarios,
                     render=True)
 
-n_steps = 4
+n_steps = 100
 env.reset()
 # step scenario n_steps times
 for step in range(0, n_steps):
     env.step()
     time.sleep(sim_step_time/sim_real_time_factor)
 
-video_renderer.export_video(filename="/tmp/video", remove_image_dir=False)
+video_renderer.export_video(filename="/tmp/video", remove_image_dir=True)

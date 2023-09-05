@@ -1,0 +1,48 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+			{
+					"name": "Python: Current File",
+					"type": "python",
+					"request": "launch",
+					"program": "${file}",
+					"console": "integratedTerminal",
+					"justMyCode": false,
+					"env": {
+						"PYTHONPATH": "${workspaceFolder}/bazel-example_benchmark/tools/debug",
+			 }
+			},
+			{
+					"name": "(gdb) Launch",
+					"type": "cppdbg",
+					"request": "launch",
+					"program": "${workspaceFolder}/bazel-bin/src/run/mergeing_test_specific",
+					"args": [],
+					"stopAtEntry": false,
+					"cwd": "${workspaceFolder}",
+					"environment": [],
+					"externalConsole": false,
+					"setupCommands": [
+							{
+									"description": "Enable pretty-printing for gdb",
+									"text": "-enable-pretty-printing",
+									"ignoreFailures": true
+							}
+					]
+			},
+			{
+					"name": "(gdb) Attach",
+					"type": "cppdbg",
+					"request": "attach",
+					"program": "${workspaceFolder}/tools/python/venv/bin/python3",
+					"cwd" : "${workspaceFolder}",
+					"additionalSOLibSearchPath":"${workspaceFolder}/bazel-out/k8-fastbuild/bin/src/run/merging_test_specific.runfiles/bark_project",
+					"processId": "${command:pickProcess}",
+					"MIMode": "gdb",
+					"sourceFileMap" : {"/proc/self/cwd/": "${workspaceFolder}"}
+					}
+	]
+}

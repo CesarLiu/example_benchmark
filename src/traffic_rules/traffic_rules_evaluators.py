@@ -20,13 +20,19 @@ def get_traffic_rule_evaluator_params(rule_name):
                            "label_functions": [SafeDistanceLabelFunction("sd_front", False, 1.0, 1.0, -7.84, -7.84, True, 4, False, 2.0, 1.57, False)]}}
 
     elif rule_name == "zip_merge":
-        logging.raiseExceptions(NOT_AVAILABLE)
+        rule = {"type": "EvaluatorLTL",
+                "params": {"ltl_formula": "(in_direct_front_x & !merged_e & (in_direct_front_x | merged_x) U merged_e) -> G(merged_e & merged_x -> !in_direct_front_x)",
+                           "label_functions": [FrontOfLabelFunction("in_direct_front_x"),
+                                               ]}}
 
     elif rule_name == "right_overtake":
         logging.raiseExceptions(NOT_AVAILABLE)
 
     elif rule_name == "safe_lane_change":
-        logging.raiseExceptions(NOT_AVAILABLE)
+        rule = {"type": "EvaluatorLTL",
+                "params": {"ltl_formula": "G (lane_change -> sd_rear)",
+                           "label_functions": [LaneChangeLabelFunction("lane_change"),
+                                               SafeDistanceLabelFunction("sd_rear", True, 1.0, 1.0, 7.84, 7.84, True, 4, False, 2.0, 1.57, False)]}}
 
     elif rule_name == "safe_lane_change_assumption":
         logging.raiseExceptions(NOT_AVAILABLE)
@@ -47,7 +53,10 @@ def get_traffic_rule_evaluator_params(rule_name):
         logging.raiseExceptions(NOT_AVAILABLE)
 
     elif rule_name == "maximum_speed_limit":
-        logging.raiseExceptions(NOT_AVAILABLE)
+        # logging.raiseExceptions(NOT_AVAILABLE)
+        rule = {"type": "EvaluatorLTL",
+                "params": {"ltl_formula": "G below_speed",
+                           "label_functions": [BelowSpeedLimitLabelFunction("below_speed", 34.0)]}}
 
     elif rule_name == "inside_rightmost_lane":
         logging.raiseExceptions(NOT_AVAILABLE)

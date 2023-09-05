@@ -54,6 +54,7 @@ py_test(
           "@bark_project//bark/runtime/scenario/scenario_generation:scenario_generation",
           "@bark_project//bark/runtime:runtime",
           "//src/mcts_config",
+          "//tools/debug:debug_settings",
           "//src/common:custom_lane_corridor_config"],
 )
 
